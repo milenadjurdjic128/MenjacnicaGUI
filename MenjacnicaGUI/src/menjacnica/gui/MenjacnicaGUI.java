@@ -51,7 +51,7 @@ public class MenjacnicaGUI extends JFrame {
 	private JScrollPane scrollPane;
 	private JTable table;
 	private JScrollPane scrollPane_1;
-	private JTextArea textAreaStatus;
+	
 	private JPanel panel;
 	private JButton btnDodajKurs;
 	private JButton btnNewButton;
@@ -67,19 +67,32 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem mntmDodajKurs;
 	private JMenuItem mntmObrisiKurs;
 	private JMenuItem mntmIzvrsiZamenu;
-
-	private JTextArea getTextAreaStatus() {
-		if (textAreaStatus == null) {
-			textAreaStatus = new JTextArea();
-			textAreaStatus.setEditable(false);
-			textAreaStatus.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "STATUS", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		}
+	
+	
+	private static JTextArea textAreaStatus = new JTextArea();
+	
+	public static JTextArea getTextAreaStatus1() {
 		return textAreaStatus;
 	}
-	JTextArea jta = new JTextArea();
-	private String izabrano = jta.getText();
+	
+	public static void setTextAreaStatus(String status) {
+		MenjacnicaGUI.textAreaStatus.setText(status);
+	}
+
 	
 	
+	static JTextArea jta = new JTextArea();
+	private static String izabrano = jta.getText();
+	
+	
+	public static String getIzabrano() {
+		return izabrano;
+	}
+
+	public static void setIzabrano(String i) {
+		izabrano = i;
+	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -125,7 +138,7 @@ public class MenjacnicaGUI extends JFrame {
 			table = new JTable();
 			table.setModel(new DefaultTableModel(
 				new Object[][] {
-					{null, null, null, null, null, null},
+					{null, null, null, null, null, ""},
 					{null, null, null, null, null, null},
 					{null, null, null, null, null, null},
 					{null, null, null, null, null, null},
@@ -145,24 +158,34 @@ public class MenjacnicaGUI extends JFrame {
 				 */
 				private static final long serialVersionUID = 1L;
 				Class[] columnTypes = new Class[] {
-					String.class, String.class, Double.class, Double.class, Double.class, String.class
+					String.class, String.class, String.class, String.class, String.class, String.class
 				};
 				public Class getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
 				}
 			});
-			addPopup(table, getPopupMenu());
 			table.getColumnModel().getColumn(1).setPreferredWidth(85);
+			addPopup(table, getPopupMenu());
 		}
 		return table;
 	}
 	private JScrollPane getScrollPane_1() {
 		if (scrollPane_1 == null) {
 			scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBorder(new TitledBorder(null, "STATUS", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			scrollPane_1.setPreferredSize(new Dimension(60, 60));
-			scrollPane_1.setViewportView(getTextAreaStatus());
+			scrollPane_1.setViewportView(getTextAreaStatus1());
 		}
 		return scrollPane_1;
+	}
+	
+	private JTextArea getTextAreaStatus() {
+		if (textAreaStatus == null) {
+			textAreaStatus = new JTextArea();
+			textAreaStatus.setEditable(false);
+			textAreaStatus.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "STATUS", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		}
+		return textAreaStatus;
 	}
 	
 	private JPanel getPanel() {
@@ -179,6 +202,13 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnDodajKurs() {
 		if (btnDodajKurs == null) {
 			btnDodajKurs = new JButton("Dodaj kurs");
+			btnDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent o) {
+					new DodajKursGUI().setVisible(true);
+					
+					
+				}
+			});
 			btnDodajKurs.setBounds(10, 11, 120, 23);
 		}
 		return btnDodajKurs;
@@ -337,6 +367,13 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmDodajKurs() {
 		if (mntmDodajKurs == null) {
 			mntmDodajKurs = new JMenuItem("Dodaj kurs");
+			mntmDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent o) {
+					
+					new DodajKursGUI().setVisible(true);
+					
+				}
+			});
 		}
 		return mntmDodajKurs;
 	}
@@ -352,4 +389,6 @@ public class MenjacnicaGUI extends JFrame {
 		}
 		return mntmIzvrsiZamenu;
 	}
+
+	
 }
