@@ -34,9 +34,6 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.UIManager;
-
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -179,15 +176,6 @@ public class MenjacnicaGUI extends JFrame {
 		return scrollPane_1;
 	}
 	
-	private JTextArea getTextAreaStatus() {
-		if (textAreaStatus == null) {
-			textAreaStatus = new JTextArea();
-			textAreaStatus.setEditable(false);
-			textAreaStatus.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "STATUS", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		}
-		return textAreaStatus;
-	}
-	
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
@@ -205,8 +193,6 @@ public class MenjacnicaGUI extends JFrame {
 			btnDodajKurs.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent o) {
 					new DodajKursGUI().setVisible(true);
-					
-					
 				}
 			});
 			btnDodajKurs.setBounds(10, 11, 120, 23);
@@ -228,6 +214,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnNewButton_1() {
 		if (btnNewButton_1 == null) {
 			btnNewButton_1 = new JButton("Izvrsi zamenu");
+			btnNewButton_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent o) {
+					new IzvrsiZamenuGUI().setVisible(true);
+				}
+			});
 			btnNewButton_1.setBounds(10, 79, 120, 23);
 		}
 		return btnNewButton_1;
@@ -396,6 +387,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMenuItem_2() {
 		if (mntmIzvrsiZamenu == null) {
 			mntmIzvrsiZamenu = new JMenuItem("Izvrsi zamenu");
+			mntmIzvrsiZamenu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent o) {
+					new IzvrsiZamenuGUI().setVisible(true);
+				}
+			});
 		}
 		return mntmIzvrsiZamenu;
 	}
