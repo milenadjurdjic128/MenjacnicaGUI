@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -88,7 +89,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 	private JLabel getLblProdajniKurs() {
 		if (lblProdajniKurs == null) {
 			lblProdajniKurs = new JLabel("Kupovni kurs:");
-			lblProdajniKurs.setBounds(10, 11, 75, 14);
+			lblProdajniKurs.setBounds(10, 11, 124, 14);
 		}
 		return lblProdajniKurs;
 	}
@@ -207,9 +208,12 @@ public class IzvrsiZamenuGUI extends JFrame {
 	}
 	
 	private String kupovinaIliProdaja() {
-		String p = "Kupovina";
+		String p = "Nepoznato";
 		if(rdbtnProdaja.isSelected()) {
 			p = "Prodaja";
+		} 
+		if (rdbtnKupujem.isSelected()) {
+			p = "Kupovina";
 		}
 		return p;
 	}
@@ -220,12 +224,18 @@ public class IzvrsiZamenuGUI extends JFrame {
 			btnIzvrsiZamenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
-					String d = "Valuta: " + comboBox.getSelectedItem() + ", Iznos: " + textFieldIznos.getText() + ", U pitanju je: " + 
-					kupovinaIliProdaja();
-					
-					MenjacnicaGUI.setIzabrano(MenjacnicaGUI.getIzabrano() + d + "\n");
-					
-					MenjacnicaGUI.setTextAreaStatus(MenjacnicaGUI.getIzabrano());
+					try {
+						String d = "Valuta: " + comboBox.getSelectedItem() + ", Iznos: " + textFieldIznos.getText() + ", U pitanju je: " + 
+						kupovinaIliProdaja();
+						
+						MenjacnicaGUI.setIzabrano(MenjacnicaGUI.getIzabrano() + d + "\n");
+						
+						MenjacnicaGUI.setTextAreaStatus(MenjacnicaGUI.getIzabrano());
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(contentPane,
+								e.getMessage(), "Greska",
+								JOptionPane.ERROR_MESSAGE);
+					}
 					
 					
 				}

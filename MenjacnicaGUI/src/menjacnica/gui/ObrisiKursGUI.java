@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 
@@ -189,13 +190,20 @@ public class ObrisiKursGUI extends JFrame {
 			btnObrisi = new JButton("Obrisi");
 			btnObrisi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent o) {
-					String d = "Sifra: " + textFieldSifra.getText() + ", Skraceni naziv: " + textFieldSkraceni.getText() + 
-							", Prodajni kurs: " + textFieldProdajni.getText() + ", Srednji kurs: " + textFieldSrednji.getText() + 
-							", Kupovni kurs: " + textFieldKupovni.getText() + ", Naziv: " + textFieldNaziv.getText();
-					
-					MenjacnicaGUI.setIzabrano(MenjacnicaGUI.getIzabrano() + d + "\n");
-					
-					MenjacnicaGUI.setTextAreaStatus(MenjacnicaGUI.getIzabrano());
+					try {
+						String d = "Obrisan = Sifra: " + textFieldSifra.getText() + ", Skraceni naziv: " + textFieldSkraceni.getText() + 
+								", Prodajni kurs: " + textFieldProdajni.getText() + ", Srednji kurs: " + textFieldSrednji.getText() + 
+								", Kupovni kurs: " + textFieldKupovni.getText() + ", Naziv: " + textFieldNaziv.getText();
+						
+						MenjacnicaGUI.setIzabrano(MenjacnicaGUI.getIzabrano() + d + "\n");
+						
+						MenjacnicaGUI.setTextAreaStatus(MenjacnicaGUI.getIzabrano());
+						
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(contentPane,
+								e.getMessage(), "Greska",
+								JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			});
 			btnObrisi.setEnabled(false);

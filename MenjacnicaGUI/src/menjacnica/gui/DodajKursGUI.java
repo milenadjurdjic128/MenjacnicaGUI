@@ -1,10 +1,12 @@
 package menjacnica.gui;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -175,13 +177,21 @@ public class DodajKursGUI extends JFrame {
 			btnDodaj = new JButton("Dodaj");
 			btnDodaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent o) {
-					String d = "Sifra: " + textFieldSifra.getText() + ", Skraceni naziv: " + textFieldSkraceni.getText() + 
-							", Prodajni kurs: " + textFieldProdajni.getText() + ", Srednji kurs: " + textFieldSrednji.getText() + 
-							", Kupovni kurs: " + textFieldKupovni.getText() + ", Naziv: " + textFieldNaziv.getText();
-					
-					MenjacnicaGUI.setIzabrano(MenjacnicaGUI.getIzabrano() + d + "\n");
-					
-					MenjacnicaGUI.setTextAreaStatus(MenjacnicaGUI.getIzabrano());
+					try {
+						String d = "Dodat = Sifra: " + textFieldSifra.getText() + ", Skraceni naziv: " + textFieldSkraceni.getText() + 
+								", Prodajni kurs: " + textFieldProdajni.getText() + ", Srednji kurs: " + textFieldSrednji.getText() + 
+								", Kupovni kurs: " + textFieldKupovni.getText() + ", Naziv: " + textFieldNaziv.getText();
+						
+						
+						MenjacnicaGUI.setIzabrano(MenjacnicaGUI.getIzabrano() + d + "\n");
+						
+						MenjacnicaGUI.setTextAreaStatus(MenjacnicaGUI.getIzabrano());
+						
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(contentPane,
+								e.getMessage(), "Greska",
+								JOptionPane.ERROR_MESSAGE);
+					}
 					
 				}
 			});

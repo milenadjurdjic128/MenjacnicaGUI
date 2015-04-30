@@ -68,27 +68,7 @@ public class MenjacnicaGUI extends JFrame {
 	
 	private static JTextArea textAreaStatus = new JTextArea();
 	
-	public static JTextArea getTextAreaStatus1() {
-		return textAreaStatus;
-	}
-	
-	public static void setTextAreaStatus(String status) {
-		MenjacnicaGUI.textAreaStatus.setText(status);
-	}
 
-	
-	
-	static JTextArea jta = new JTextArea();
-	private static String izabrano = jta.getText();
-	
-	
-	public static String getIzabrano() {
-		return izabrano;
-	}
-
-	public static void setIzabrano(String i) {
-		izabrano = i;
-	}
 
 	/**
 	 * Launch the application.
@@ -123,6 +103,27 @@ public class MenjacnicaGUI extends JFrame {
 		contentPane.add(getScrollPane_1(), BorderLayout.SOUTH);
 		contentPane.add(getPanel(), BorderLayout.EAST);
 	}
+
+	public static JTextArea getTextAreaStatus1() {
+		return textAreaStatus;
+	}
+	
+	public static void setTextAreaStatus(String status) {
+		MenjacnicaGUI.textAreaStatus.setText(status);
+	}
+
+	static JTextArea jta = new JTextArea();
+	private static String izabrano = jta.getText();
+	
+	
+	public static String getIzabrano() {
+		return izabrano;
+	}
+
+	public static void setIzabrano(String i) {
+		izabrano = i;
+	} 
+	
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
@@ -155,7 +156,7 @@ public class MenjacnicaGUI extends JFrame {
 				 */
 				private static final long serialVersionUID = 1L;
 				Class[] columnTypes = new Class[] {
-					String.class, String.class, String.class, String.class, String.class, String.class
+					Integer.class, String.class, Double.class, Double.class, Double.class, String.class
 				};
 				public Class getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
@@ -170,7 +171,7 @@ public class MenjacnicaGUI extends JFrame {
 		if (scrollPane_1 == null) {
 			scrollPane_1 = new JScrollPane();
 			scrollPane_1.setBorder(new TitledBorder(null, "STATUS", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			scrollPane_1.setPreferredSize(new Dimension(60, 60));
+			scrollPane_1.setPreferredSize(new Dimension(70, 70));
 			scrollPane_1.setViewportView(getTextAreaStatus1());
 		}
 		return scrollPane_1;
@@ -255,8 +256,9 @@ public class MenjacnicaGUI extends JFrame {
 							textAreaStatus.setText(izabrano);
 						}
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						JOptionPane.showMessageDialog(contentPane,
+								e.getMessage(), "Greska",
+								JOptionPane.ERROR_MESSAGE);
 					}
 					
 					
@@ -267,32 +269,7 @@ public class MenjacnicaGUI extends JFrame {
 		}
 		return mntmOpen;
 	}
-	private JMenuItem getMntmSave() {
-		if (mntmSave == null) {
-			mntmSave = new JMenuItem("Save");
-			mntmSave.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent o) {
-					
-					try {
-						JFileChooser fc = new JFileChooser();
-						int opt = fc.showSaveDialog(contentPane);
-						if(opt == JFileChooser.APPROVE_OPTION) {
-							File f = fc.getSelectedFile();
-							izabrano = izabrano + "Sacuvan fajl: " + f.getAbsolutePath() + "\n";
-							textAreaStatus.setText(izabrano);
-						}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-				}
-			});
-			mntmSave.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/com/sun/java/swing/plaf/windows/icons/FloppyDrive.gif")));
-			mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-		}
-		return mntmSave;
-	}
+
 	
 	private void ugasiProgram() {
 		int sifra = JOptionPane.showConfirmDialog(contentPane, "Da li zaista zelite da izadjete iz programa?", "Izlaz", JOptionPane.YES_NO_CANCEL_OPTION);
@@ -360,19 +337,7 @@ public class MenjacnicaGUI extends JFrame {
 			}
 		});
 	}
-	private JMenuItem getMntmDodajKurs() {
-		if (mntmDodajKurs == null) {
-			mntmDodajKurs = new JMenuItem("Dodaj kurs");
-			mntmDodajKurs.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent o) {
-					
-					new DodajKursGUI().setVisible(true);
-					
-				}
-			});
-		}
-		return mntmDodajKurs;
-	}
+	
 	private JMenuItem getMenuItem_1() {
 		if (mntmObrisiKurs == null) {
 			mntmObrisiKurs = new JMenuItem("Obrisi kurs");
@@ -396,5 +361,45 @@ public class MenjacnicaGUI extends JFrame {
 		return mntmIzvrsiZamenu;
 	}
 
+	private JMenuItem getMntmSave() {
+		if (mntmSave == null) {
+			mntmSave = new JMenuItem("Save");
+			mntmSave.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent o) {
+					
+					try {
+						JFileChooser fc = new JFileChooser();
+						int opt = fc.showSaveDialog(contentPane);
+						if(opt == JFileChooser.APPROVE_OPTION) {
+							File f = fc.getSelectedFile();
+							izabrano = izabrano + "Sacuvan fajl: " + f.getAbsolutePath() + "\n";
+							textAreaStatus.setText(izabrano);
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(contentPane,
+								e.getMessage(), "Greska",
+								JOptionPane.ERROR_MESSAGE);
+					}
+					
+				}
+			});
+			mntmSave.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/com/sun/java/swing/plaf/windows/icons/FloppyDrive.gif")));
+			mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+		}
+		return mntmSave;
+	}
 	
+	private JMenuItem getMntmDodajKurs() {
+		if (mntmDodajKurs == null) {
+			mntmDodajKurs = new JMenuItem("Dodaj kurs");
+			mntmDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent o) {
+					
+					new DodajKursGUI().setVisible(true);
+					
+				}
+			});
+		}
+		return mntmDodajKurs;
+	}
 }
