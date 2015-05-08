@@ -142,6 +142,7 @@ public class ObrisiKursGUI extends JFrame {
 			textFieldSifra = new JTextField();
 			textFieldSifra.setColumns(10);
 			textFieldSifra.setBounds(10, 52, 194, 20);
+			textFieldSifra.setEditable(false);
 		}
 		return textFieldSifra;
 	}
@@ -150,7 +151,8 @@ public class ObrisiKursGUI extends JFrame {
 			textFieldNaziv = new JTextField();
 			textFieldNaziv.setColumns(10);
 			textFieldNaziv.setBounds(224, 52, 194, 20);
-		}
+			textFieldNaziv.setEditable(false);
+			}
 		return textFieldNaziv;
 	}
 	private JTextField getTextFieldProdajni() {
@@ -158,6 +160,7 @@ public class ObrisiKursGUI extends JFrame {
 			textFieldProdajni = new JTextField();
 			textFieldProdajni.setColumns(10);
 			textFieldProdajni.setBounds(10, 116, 194, 20);
+			textFieldProdajni.setEditable(false);
 		}
 		return textFieldProdajni;
 	}
@@ -166,6 +169,7 @@ public class ObrisiKursGUI extends JFrame {
 			textFieldKupovni = new JTextField();
 			textFieldKupovni.setColumns(10);
 			textFieldKupovni.setBounds(224, 116, 194, 20);
+			textFieldKupovni.setEditable(false);
 		}
 		return textFieldKupovni;
 	}
@@ -174,6 +178,7 @@ public class ObrisiKursGUI extends JFrame {
 			textFieldSrednji = new JTextField();
 			textFieldSrednji.setColumns(10);
 			textFieldSrednji.setBounds(10, 178, 194, 20);
+			textFieldSrednji.setEditable(false);
 		}
 		return textFieldSrednji;
 	}
@@ -182,6 +187,7 @@ public class ObrisiKursGUI extends JFrame {
 			textFieldSkraceni = new JTextField();
 			textFieldSkraceni.setColumns(10);
 			textFieldSkraceni.setBounds(224, 178, 194, 20);
+			textFieldSkraceni.setEditable(false);
 		}
 		return textFieldSkraceni;
 	}
@@ -219,9 +225,22 @@ public class ObrisiKursGUI extends JFrame {
 					
 					if(chckbxZaistaObrisiKurs.isSelected()) {
 						btnObrisi.setEnabled(true);
+						textFieldKupovni.setEditable(true);
+						textFieldNaziv.setEditable(true);
+						textFieldProdajni.setEditable(true);
+						textFieldSifra.setEditable(true);
+						textFieldSkraceni.setEditable(true);
+						textFieldSrednji.setEditable(true);
 					}
 					else {
 						btnObrisi.setEnabled(false);
+						btnObrisi.setEnabled(false);
+						textFieldKupovni.setEditable(false);
+						textFieldNaziv.setEditable(false);
+						textFieldProdajni.setEditable(false);
+						textFieldSifra.setEditable(false);
+						textFieldSkraceni.setEditable(false);
+						textFieldSrednji.setEditable(false);
 					}
 					
 				}
