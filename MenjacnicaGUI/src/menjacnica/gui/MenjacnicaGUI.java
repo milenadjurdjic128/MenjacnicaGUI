@@ -343,7 +343,7 @@ public class MenjacnicaGUI extends JFrame {
 			mntmObrisiKurs = new JMenuItem("Obrisi kurs");
 			mntmObrisiKurs.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent o) {
-					new DodajKursGUI().setVisible(true);
+					new ObrisiKursGUI().setVisible(true);
 				}
 			});
 		}
